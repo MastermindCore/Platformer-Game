@@ -16,10 +16,13 @@ pygame.display.set_caption("Platformer")
 sun_img = pygame.image.load('img/sun.png')
 bg_img = pygame.image.load('img/sky.png')
 restart_img = pygame.image.load('img/restart_btn.png')
+start_img = pygame.image.load('img/start_btn.png')
+exit_img = pygame.image.load('img/exit_btn.png')
+
 
 tile_size = 30
 game_over = 0
-
+main_menu = True
 # Initialize sprite groups
 blob_group = pygame.sprite.Group()
 lava_group = pygame.sprite.Group()
@@ -251,23 +254,33 @@ player = Player(70, screen_height - 130)
 world = World(world_data)
 
 restart_button = Button(screen_width // 2 - 50, screen_height // 2 + 100, restart_img)
+start_button = Button(screen_width // 2 - 300,screen_height // 2, start_img)
+exit_button = Button(screen_width // 2 + 60,screen_height // 2, exit_img)
+
 
 run = True
 while run:
     clock.tick(fps)
     Screen.blit(bg_img, (0, 0))
     Screen.blit(sun_img, (100, 100))
-    world.draw()
-    if game_over == 0:
-     blob_group.update()
+    if main_menu == True:
+     if exit_button.draw():
+        run = False
+     if start_button.draw():
+        main_menu = False
 
-    blob_group.draw(Screen)
-    lava_group.draw(Screen)
+    else:
+     world.draw()
+     if game_over == 0:
+      blob_group.update()
+
+     blob_group.draw(Screen)
+     lava_group.draw(Screen)
     
-    # Update player and handle game over
-    game_over = player.update(game_over)
+     # Update player and handle game over
+     game_over = player.update(game_over)
 
-    if game_over == -1:
+     if game_over == -1:
        if restart_button.draw():
         player.reset(70, screen_height - 130)
         game_over = 0
