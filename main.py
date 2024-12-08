@@ -32,7 +32,7 @@ class Player():
         self.counter = 0
         for num in range(1,5):
            img_right = pygame.image.load(f'img/guy{num}.png')
-           img_right = pygame.transform.scale(img_right, (40, 80))  
+           img_right = pygame.transform.scale(img_right, (30, 60))  
            img_left = pygame.transform.flip(img_right, True, False)
            self.images_right.append(img_right)
            self.images_left.append(img_left)
@@ -88,13 +88,20 @@ class Player():
 
         self.vel_y += 1
         if self.vel_y > 10:
-            self.vel_ = 10
+            self.vel_y  = 10
         dy += self.vel_y
 
         for tile in world.tile_list:
-            if tile[1].colliderect(self.rect.x, self.rect.y + dy, self.width, self.height):
-                
+            if tile[1].colliderect(self.rect.x + dx, self.rect.y, self.width, self.height):
+                dx = 0
 
+
+            if tile[1].colliderect(self.rect.x, self.rect.y + dy, self.width, self.height):
+               if self.vel_y < 0:
+                dy = tile[1].bottom - self.rect.top 
+                self.vel_y = 0
+               elif self.vel_y >= 0:
+                dy = tile[1].top - self.rect.bottom 
 
 
 
@@ -157,7 +164,7 @@ world_data = [
 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 0, 0, 0, 0, 1], 
 [1, 0, 2, 0, 0, 7, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], 
 [1, 0, 0, 2, 0, 0, 4, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 1], 
-[1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1], 
+[1, 0, 0, 0, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1], 
 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], 
 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 0, 0, 0, 2, 0, 1], 
 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], 
