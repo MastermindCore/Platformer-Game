@@ -19,10 +19,9 @@ Welcome to **Platformer Adventure**, a fun and challenging game where players co
 
 Controls
 --------------
-Arrow Keys	Move
-Spacebar	Jump
-Development Notes
-This project was created as a platformer game inspired by classic arcade adventures. The gameplay focuses on avoiding obstacles, collecting coins, and progressing through levels.
+Arrow Keys to	Move
+Spacebar to	Jump
+
 
 AI Assistance
 -------------
@@ -35,3 +34,7 @@ Fix bugs 🐛
 Improve levels 🎨
 Add new features 🌟
 Feel free to open a pull request or submit an issue.
+
+Development Notes
+--------------------
+This project was created as a platformer game inspired by classic arcade adventures. The gameplay focuses on avoiding obstacles, collecting coins, and progressing through levels.
